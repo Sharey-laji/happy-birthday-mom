@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>🎂 妈妈生日快乐 🎈</title>
+    <!-- Font Awesome 6 免费图标库 (蛋糕, 爱心, 礼物等) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- 柔和可爱的 Google 字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(145deg, #ffe9f4 0%, #ffe0f0 40%, #fcd9e8 100%);
+            /* 柔粉色调渐变 */
+            position: relative;
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        /* ----- 漂浮气球 (纯CSS绘制, 可爱又可控) ----- */
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 60px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            background-color: var(--color, #f9a8d4);
+            /* 默认粉色，通过内联style覆盖 */
+            z-index: 1;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+            animation: float 5s ease-in-out infinite;
+            transform-origin: bottom center;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
+        }
+
+        /* 气球绳子 */
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 28px;
+            background: linear-gradient(45deg, #b0a8a0, #8b7a6b);
+            border-radius: 1px;
+            z-index: 0;
+        }
+
+        /* 气球上的高光小点 */
+        .balloon::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 12px;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+            50% {
+                transform: translateY(-25px) rotate(-2deg);
+            }
+            75% {
+                transform: translateY(-10px) rotate(3deg);
+            }
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
+        /* 不同气球的位置和延迟都在HTML内联中设置，更灵活 */
+
+        /* ----- 主卡片 (毛玻璃效果) ----- */
+        .birthday-card {
+            position: relative;
+            z-index: 20;
+            max-width: 620px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 48px 48px 48px 48px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 25px 40px -12px rgba(252, 116, 160, 0.35),
+                        0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+            text-align: center;
+            border: 1px solid rgba(255,255,240,0.7);
+            transition: transform 0.2s ease;
+        }
+
+        .birthday-card:hover {
+            transform: scale(1.01);
+        }
+
+        /* 大标题 */
+        .title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #b3426b;
+            text-shadow: 3px 3px 0 rgba(255, 220, 235, 0.8);
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            word-break: break-word;
+        }
+
+        .sub-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #d9668b;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .sub-title i {
+            font-size: 2.4rem;
+            color: #fc7eb3;
+        }
+
+        /* 蛋糕大图标区 */
+        .cake-area {
+            margin: 24px 0 18px;
+            filter: drop-shadow(0 8px 12px rgba(252, 141, 181, 0.3));
+        }
+
+        .cake-icon {
+            font-size: 6rem;
+            color: #f55b9c;
+            animation: subtleWiggle 3s infinite;
+        }
+
+        @keyframes subtleWiggle {
+            0%,100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+
+        /* 祝福语 */
+        .message {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #5c3b4c;
+            margin: 18px 0 10px;
+            line-height: 1.5;
+            background: rgba(255, 240, 245, 0.5);
+            border-radius: 60px;
+            padding: 16px 20px;
+            backdrop-filter: blur(4px);
+            border: 1px dashed #fcaac3;
+        }
+
+        .message i {
+            color: #e46b93;
+            margin: 0 6px;
+        }
+
+        /* 落款 */
+        .signature {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #aa4e6c;
+            margin: 25px 0 16px;
+            letter-spacing: 2px;
+            font-style: italic;
+            border-top: 2px dotted rgba(255, 165, 185, 0.7);
+            padding-top: 22px;
+        }
+
+        .signature i {
+            color: #ff8aae;
+            font-size: 1.8rem;
+        }
+
+        /* 互动小提示 */
+        .hint {
+            font-size: 1.2rem;
+            color: #a15c78;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50px;
+            padding: 8px 20px;
+            display: inline-block;
+            margin-top: 10px;
+            cursor: default;
+            backdrop-filter: blur(5px);
+            border: 1px solid #ffc1d0;
+            transition: all 0.2s;
+        }
+
+        .hint i {
+            margin-right: 8px;
+            color: #fb6b9e;
+        }
+
+        .hint:hover {
+            background: #fff0f5;
+            box-shadow: 0 4px 10px rgba(252, 130, 170, 0.3);
+        }
+
+        /* 漂浮爱心 (由JS动态生成) */
+        .fly-heart {
+            position: fixed;
+            font-size: 2.2rem;
+            user-select: none;
+            pointer-events: none;
+            z-index: 9999;
+            animation: flyUp 1.6s ease-out forwards;
+            filter: drop-shadow(0 4px 8px rgba(255, 80, 130, 0.4));
+        }
+
+        @keyframes flyUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(0.8);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-140px) scale(1.4);
+            }
+        }
+
+        /* 移动端优化 */
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2rem;
+            }
+            .sub-title {
+                font-size: 1.5rem;
+            }
+            .message {
+                font-size: 1.3rem;
+                padding: 14px 12px;
+            }
+            .cake-icon {
+                font-size: 5rem;
+            }
+            .signature {
+                font-size: 1.3rem;
+            }
+            .birthday-card {
+                padding: 1.8rem 1.2rem;
+                border-radius: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== 纯 CSS 气球 ========== -->
+    <!-- 气球1 (粉红) -->
+    <div class="balloon" style="--color: #FFB3C6; left: 2%; top: 15%; animation-delay: 0s;"></div>
+    <!-- 气球2 (浅紫) -->
+    <div class="balloon" style="--color: #D9B8FF; left: 88%; top: 70%; animation-delay: 0.5s;"></div>
+    <!-- 气球3 (奶油黄) -->
+    <div class="balloon" style="--color: #FFE5A3; left: 12%; top: 80%; animation-delay: 1.2s;"></div>
+    <!-- 气球4 (薄荷绿) -->
+    <div class="balloon" style="--color: #B1F0D7; left: 75%; top: 12%; animation-delay: 0.8s;"></div>
+    <!-- 气球5 (浅橙) -->
+    <div class="balloon" style="--color: #FFCC99; left: 92%; top: 35%; animation-delay: 0.3s;"></div>
+    <!-- 气球6 (淡蓝) -->
+    <div class="balloon" style="--color: #B5E6FF; left: 5%; top: 55%; animation-delay: 1.5s;"></div>
+    <!-- 再加两个小气球更热闹 (尺寸稍微小一点) -->
+    <div class="balloon" style="--color: #FAC8CD; width: 40px; height: 50px; left: 20%; top: 25%; animation-delay: 0.9s;"></div>
+    <div class="balloon" style="--color: #C4E0F9; width: 40px; height: 50px; left: 65%; top: 88%; animation-delay: 0.1s;"></div>
+
+    <!-- ========== 主祝福卡片 ========== -->
+    <main class="birthday-card">
+        <!-- 标题：可替换“妈妈”为您对妈妈的专属称呼（例如“妈咪”“母后”等） -->
+        <h1 class="title">🎉 祝 妈 妈 生 日 快 乐 🎉</h1>
+        <div class="sub-title">
+            <i class="fa-solid fa-heart"></i>  Happy Birthday Mom!  <i class="fa-solid fa-heart"></i>
+        </div>
+
+        <!-- 蛋糕区域 (FontAwesome 蛋糕图标) -->
+        <div class="cake-area">
+            <i class="fa-solid fa-cake-candles cake-icon"></i>
+        </div>
+
+        <!-- 温馨祝福 (您可以根据妈妈的性格修改文字) -->
+        <div class="message">
+            <i class="fa-regular fa-star"></i>  愿您永远健康、美丽、幸福  <i class="fa-regular fa-star"></i><br>
+            <span style="font-size: 1.2rem; display: block; margin-top: 10px;">感谢您无私的爱与陪伴</span>
+        </div>
+
+        <!-- 落款 (可改成您的名字或孩子们的名字) -->
+        <div class="signature">
+            <i class="fa-regular fa-heart"></i>   爱您的孩子   <i class="fa-regular fa-heart"></i>
+        </div>
+
+        <!-- 互动小提示: 点击任意位置送爱心 (妈妈一定会喜欢这个小彩蛋) -->
+        <div class="hint">
+            <i class="fa-regular fa-hand-pointer"></i> 点击屏幕任意处，飘落爱心 <i class="fa-regular fa-heart" style="color:#ff3b6f;"></i>
+        </div>
+
+        <!-- 小小的制作脚注，体现GitHub托管 -->
+        <div style="margin-top: 28px; font-size: 0.9rem; color: #b57994; opacity: 0.7; border-top: 1px dashed #fbb0c0; padding-top: 16px;">
+            <i class="fa-regular fa-copyright"></i>  with ❤️  on GitHub Pages
+        </div>
+    </main>
+
+    <!-- ========== 互动JS：点击出现爱心 ========== -->
+    <script>
+        (function() {
+            // 爱心出现函数
+            function createHeart(x, y) {
+                const heart = document.createElement('div');
+                heart.className = 'fly-heart';
+                // 随机使用爱心符号 或者 FontAwesome 图标 (但为了简单，直接用emoji❤️)
+                // 偶尔变一下花样 🎂 🎈
+                const symbols = ['❤️', '💖', '💗', '💕', '🎂', '🌸', '🌷', '💐', '🧁', '🍰'];
+                const randomSym = symbols[Math.floor(Math.random() * symbols.length)];
+                heart.textContent = randomSym;
+                // 设置位置为点击坐标 (稍微偏移使中心对准点击点)
+                heart.style.left = (x - 20) + 'px';
+                heart.style.top = (y - 20) + 'px';
+                // 随机字体大小
+                const size = 1.8 + Math.random() * 1.5;
+                heart.style.fontSize = size + 'rem';
+                document.body.appendChild(heart);
+
+                // 动画结束后移除元素
+                setTimeout(() => {
+                    if (heart.parentNode) heart.remove();
+                }, 1500);
+            }
+
+            // 监听整个document的点击事件
+            document.addEventListener('click', function(e) {
+                const x = e.clientX;
+                const y = e.clientY;
+                createHeart(x, y);
+            });
+
+            // 移动端触摸也可以触发 (避免双击缩放干扰，但没关系)
+            document.addEventListener('touchstart', function(e) {
+                if (e.touches.length) {
+                    const touch = e.touches[0];
+                    const x = touch.clientX;
+                    const y = touch.clientY;
+                    createHeart(x, y);
+                }
+            }, { passive: false });  // 防止滚动中断，但允许默认事件
+
+        })();
+    </script>
+
+    <!-- 附加小说明：如何替换妈妈照片/名字 (因为代码里没放图片，想放照片的话可以参考下面注释) 
+         如果您想加入妈妈的照片：
+         1. 在 `.cake-area` 后面或卡片合适位置添加 <div class="photo-frame"><img src="妈妈的照片.jpg" alt="妈妈"></div>
+         2. 将照片文件 (如 mom.jpg) 和 index.html 一起上传到 GitHub 仓库。
+         3. 确保路径正确，或者使用在线图片链接。
+         但为了简洁优雅，目前卡片以蛋糕和文字为主，同样温馨。
+    -->
+</body>
+</html>
